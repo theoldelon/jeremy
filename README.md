@@ -1,4 +1,0 @@
-# jeremy
-"# jeremy" 
-"# myweb" 
-# jeremy
