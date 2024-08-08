@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2" defer></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-dYsi5j0HQ6W9c0m2V8EE5h5PIT5EJCTk+69RTV1xH/PI9rS3V3Q4zYxFn6T3bX0s8FZRXuZQzYefesZZELw4tA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .fixed-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+        }
+
+        .fixed-navbar + main {
+            margin-top: 4rem;
+        }
+                .active-link {
+            position: relative;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .active-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 100%;
+            height: 2px; 
+            background-color: #1e40af; 
+            transition: width 0.3s ease;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 font-sans leading-normal tracking-normal">
+    <header class="bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 shadow-lg fixed w-full z-10 backdrop-blur-md bg-opacity-50">
+        <nav class="container mx-auto px-6 py-4">
+            <ul class="flex justify-center space-x-8">
+                <li class="flex items-center">
+                    <a href="#home" class="nav-link flex items-center text-lg font-semibold text-gray-200 transition-colors duration-300 hidden md:flex">
+                        <i class="fas fa-home mr-2"></i>Home
+                    </a>
+                    <a href="#home" class="nav-link flex items-center text-lg font-semibold text-gray-200 transition-colors duration-300 md:hidden">
+                        <i class="fas fa-home"></i>
+                    </a>
+                </li>
+                <li class="flex items-center">
+                    <a href="#projects" class="nav-link flex items-center text-lg font-semibold text-gray-200 transition-colors duration-300 hidden md:flex">
+                        <i class="fas fa-project-diagram mr-2"></i>Projects
+                    </a>
+                    <a href="#projects" class="nav-link flex items-center text-lg font-semibold text-gray-200 transition-colors duration-300 md:hidden">
+                        <i class="fas fa-project-diagram"></i>
+                    </a>
+                </li>
+                <li class="flex items-center">
+                    <a href="#skills" class="nav-link flex items-center text-lg font-semibold text-gray-200 transition-colors duration-300 hidden md:flex">
+                        <i class="fas fa-cogs mr-2"></i>Skills
+                    </a>
+                    <a href="#skills" class="nav-link flex items-center text-lg font-semibold text-gray-200 transition-colors duration-300 md:hidden">
+                        <i class="fas fa-cogs"></i>
+                    </a>
+                </li>
+                <li class="flex items-center">
+                    <a href="#resume" class="nav-link flex items-center text-lg font-semibold text-gray-200 transition-colors duration-300 hidden md:flex">
+                        <i class="fas fa-file-alt mr-2"></i>Resume
+                    </a>
+                    <a href="#resume" class="nav-link flex items-center text-lg font-semibold text-gray-200 transition-colors duration-300 md:hidden">
+                        <i class="fas fa-file-alt"></i>
+                    </a>
+                </li>
+                <li class="flex items-center">
+                    <a href="#contact" class="nav-link flex items-center text-lg font-semibold text-gray-200 transition-colors duration-300 hidden md:flex">
+                        <i class="fas fa-envelope mr-2"></i>Contact
+                    </a>
+                    <a href="#contact" class="nav-link flex items-center text-lg font-semibold text-gray-200 transition-colors duration-300 md:hidden">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container mx-auto px-6 py-12">
+        <section id="home" class="text-center mb-16 bg-gradient-to-r from-gray-900 via-gray-900 to-gray-900 p-12 rounded-lg shadow-lg fade-in mt-48">
+            <!-- Profile Picture -->
+            <div class="mb-6">
+                <img src="images/ignprofile.jpg" alt="Jeremy Taraya" class="w-32 h-32 rounded-full mx-auto border-4 border-blue-600 shadow-lg">
+            </div>
+            <h1 class="text-5xl font-semibold text-gray-100 mb-4">Hi, I’m Jeremy Taraya</h1>
+            <p class="text-l text-gray-300 mb-4">Hi, I'm Jeremy, a passionate web developer specializing in crafting engaging, user-centric web applications. With a focus on clean, modern design and cutting-edge technology, I aim to deliver exceptional digital experiences.</p>
+            <p class="text-lg text-gray-300 mb-6">Explore my work, learn about my skills, and see how I can help bring your project to life. Feel free to reach out for collaborations or inquiries!</p>
+            <a href="#projects" class="inline-block py-2 px-4 bg-blue-600 text-white rounded-full hover:bg-blue-500 transition-colors duration-300 mb-64">See My Work</a>
+        </section>
+         
+   <section id="projects" class="mb-16 bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 p-12 rounded-lg shadow-lg fade-in" x-data="{ showModal: false, modalImage: '' }">
+    <h2 class="text-4xl font-bold text-gray-100 mb-6 flex items-center justify-center">
+        <i class="fas fa-project-diagram mr-3 text-3xl"></i> Projects
+    </h2>
+    <p class="text-lg text-gray-300 mb-6 text-center">Here’s a glimpse of some exciting projects I’ve been involved in:</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <div class="relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer h-72" @click="modalImage = 'images/commercial.png'; showModal = true;">
+            <img src="images/commercial.png" alt="Commercial Model" class="w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 w-full bg-gray-800 bg-opacity-75 p-3 text-white text-center">
+                <span class="text-xl font-semibold">Commercial Model</span>
+            </div>
+        </div>
+        
+        <div class="relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer h-72" @click="modalImage = 'images/pawfecthome.png'; showModal = true;">
+            <img src="images/pawfecthome.png" alt="E-commerce Platform" class="w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 w-full bg-gray-800 bg-opacity-75 p-3 text-white text-center">
+                <span class="text-xl font-semibold">Web Dev</span>
+            </div>
+        </div>
+        
+        <div class="relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer h-72" @click="modalImage = 'images/Home.jpg'; showModal = true;">
+            <img src="images/Home.jpg" alt="Blog Application" class="w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 w-full bg-gray-800 bg-opacity-75 p-3 text-white text-center">
+                <span class="text-xl font-semibold">Photoshop</span>
+            </div>
+        </div>
+
+        <div class="relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer h-72" @click="modalImage = 'images/453490872_1212041769926397_9073607853593018738_n.png'; showModal = true;">
+            <img src="images/453490872_1212041769926397_9073607853593018738_n.png" alt="Python Essentials 2" class="w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 w-full bg-gray-800 bg-opacity-75 p-3 text-white text-center">
+                <span class="text-xl font-semibold">Python Essentials 2</span>
+            </div>
+        </div>
+        
+        <div class="relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer h-72" @click="modalImage = 'images/452273746_959243132883337_6233157027580515774_n.png'; showModal = true;">
+            <img src="images/452273746_959243132883337_6233157027580515774_n.png" alt="Python Essentials 1" class="w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 w-full bg-gray-800 bg-opacity-75 p-3 text-white text-center">
+                <span class="text-xl font-semibold">Python Essentials 1</span>
+            </div>
+        </div>
+        
+        <div class="relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer h-72" @click="modalImage = 'images/outcreate (2).png'; showModal = true;">
+            <img src="images/outcreate (2).png" alt="Capstone Project" class="w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 w-full bg-gray-800 bg-opacity-75 p-3 text-white text-center">
+                <span class="text-xl font-semibold">Capstone Project</span>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Modal -->
+    <div x-show="showModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">
+        <div class="bg-gray-800 p-4 rounded-lg shadow-lg relative">
+            <button @click="showModal = false" class="absolute top-0 right-0 mt-2 mr-2 text-white text-xl">
+                &times;
+            </button>
+            <img :src="modalImage" alt="Project Image" class="max-w-full max-h-screen">
+        </div>
+    </div>
+</section>
+
+
+    <!-- Skills Section -->
+    <section id="skills" class="mb-16 bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 p-8 rounded-lg shadow-lg fade-in">
+        <h2 class="text-3xl font-bold text-gray-100 mb-4 flex items-center justify-center">
+            <i class="fas fa-tools mr-3 text-3xl"></i> Skills
+        </h2>
+        <p class="text-base text-gray-300 mb-4 text-center">Here are some of the key technologies and tools I work with:</p>
+        <div class="flex flex-col md:flex-row gap-8 items-start">
+            <div class="text-base text-gray-300 space-y-4 w-full md:w-1/2">
+                <p>I have extensive experience working with a range of modern technologies and tools that help me build efficient, scalable, and user-friendly applications. Here’s a snapshot of my expertise:</p>
+                <p>Experienced in Python for backend development, including working with frameworks such as Django. Python's simplicity and readability make it ideal for rapid development and data analysis.</p>
+                <p>Skilled in PHP for server-side scripting, with a strong focus on frameworks like Laravel. PHP is crucial for developing robust and scalable web applications.</p>
+                <p>Expert in Laravel, a powerful PHP framework that streamlines the development process with elegant syntax and built-in features like routing, authentication, and ORM.</p>
+                <p>Proficient in using Tailwind CSS, CSS, and Bootstrap for styling and layout design. These tools help me create visually appealing and responsive user interfaces.</p>
+                <p>Experienced with Git for version control, including branching, merging, and collaboration. Git ensures efficient code management and teamwork.</p>
+            </div>
+            <div class="space-y-4 w-full md:w-1/2">
+
+                <!-- Skill 2 -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-100 mb-2 flex items-center">
+                        <i class="fab fa-python text-blue-400 mr-2"></i> Python
+                    </h3>
+                    <div class="w-full bg-gray-700 rounded-full h-3">
+                        <div class="bg-blue-600 h-3 rounded-full" style="width: 65%; transition: width 1s;"></div>
+                    </div>
+                </div>
+                <!-- Skill 3 -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-100 mb-2 flex items-center">
+                        <i class="fab fa-php text-purple-400 mr-2"></i> PHP
+                    </h3>
+                    <div class="w-full bg-gray-700 rounded-full h-3">
+                        <div class="bg-blue-600 h-3 rounded-full" style="width: 60%; transition: width 1s;"></div>
+                    </div>
+                </div>
+                <!-- Skill 4 -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-100 mb-2 flex items-center">
+                        <i class="fab fa-laravel text-red-400 mr-2"></i> Laravel
+                    </h3>
+                    <div class="w-full bg-gray-700 rounded-full h-3">
+                        <div class="bg-blue-600 h-3 rounded-full" style="width: 73%; transition: width 1s;"></div>
+                    </div>
+                </div>
+                <!-- Skill 5 -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-100 mb-2 flex items-center">
+                        <i class="fab fa-css3-alt text-blue-500 mr-2"></i> Tailwind, CSS, Bootstrap
+                    </h3>
+                    <div class="w-full bg-gray-700 rounded-full h-3">
+                        <div class="bg-blue-600 h-3 rounded-full" style="width: 58%; transition: width 1s;"></div>
+                    </div>
+                </div>
+                <!-- Skill 6 (Photoshop) -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-100 mb-2 flex items-center">
+                        <i class="fab fa-adobe text-red-600 mr-2"></i> Photoshop
+                    </h3>
+                    <div class="w-full bg-gray-700 rounded-full h-3">
+                        <div class="bg-blue-600 h-3 rounded-full" style="width: 55%; transition: width 1s;"></div>
+                    </div>
+                </div>
+                <!-- Skill 7 (Django) -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-100 mb-2 flex items-center">
+                        <i class="fab fa-python text-green-600 mr-2"></i> Django
+                    </h3>
+                    <div class="w-full bg-gray-700 rounded-full h-3">
+                        <div class="bg-blue-600 h-3 rounded-full" style="width: 69%; transition: width 1s;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </section>
+
+            <!-- Resume Section -->
+            <section id="resume" class="mb-16 bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 p-12 rounded-lg shadow-lg fade-in">
+                <h2 class="text-4xl font-bold text-gray-100 mb-6 flex items-center">
+                    <i class="fas fa-briefcase mr-3 text-3xl"></i> Resume
+                </h2>
+                <p class="text-lg text-gray-300 mb-6 text-center">Here's an overview of my academic projects, internships, and educational background. Explore my journey and achievements below:</p>
+                
+                <!-- Academic Projects Section -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-200 mb-4 flex items-center">
+                        <i class="fas fa-project-diagram mr-2 text-xl"></i> Academic Projects
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- Project 1 -->
+                        <div>
+                            <h4 class="text-xl font-semibold text-blue-400 mb-1">Personal Portfolio Website</h4>
+                            <p class="text-gray-300 mb-1">Developed as part of a web development course.</p>
+                            <ul class="list-disc list-inside text-gray-300 space-y-1">
+                                <li>Designed and implemented using HTML, CSS, and JavaScript.</li>
+                                <li>Integrated responsive design for various devices using Tailwind CSS.</li>
+                                <li>Showcases projects and skills with a user-friendly interface.</li>
+                            </ul>
+                        </div>
+                        <!-- Project 2 -->
+                        <div>
+                            <h4 class="text-xl font-semibold text-blue-400 mb-1">Task Management System</h4>
+                            <p class="text-gray-300 mb-1">Created as a group project for software engineering.</p>
+                            <ul class="list-disc list-inside text-gray-300 space-y-1">
+                                <li>Developed using Laravel and Vue.js for a full-stack application.</li>
+                                <li>Features include task creation, categorization, and real-time updates.</li>
+                                <li>Collaborated with team members to implement user authentication and database management.</li>
+                            </ul>
+                        </div>
+                        <!-- Project 3 -->
+                        <div>
+                            <h4 class="text-xl font-semibold text-blue-400 mb-1">E-commerce Website</h4>
+                            <p class="text-gray-300 mb-1">Built as a final project for a front-end development course.</p>
+                            <ul class="list-disc list-inside text-gray-300 space-y-1">
+                                <li>Used React for dynamic user interfaces and state management.</li>
+                                <li>Implemented payment gateway integration and user authentication.</li>
+                                <li>Focused on creating a seamless shopping experience and responsive design.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Internships Section -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-200 mb-4 flex items-center">
+                        <i class="fas fa-briefcase mr-2 text-xl"></i> Internships
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- Internship 1 -->
+                        <div>
+                            <h4 class="text-xl font-semibold text-blue-400 mb-1">Web Development Intern</h4>
+                            <p class="text-gray-300 mb-1">Tech Innovations | Naga, Cebu</p>
+                            <p class="text-gray-400 mb-2">January 2024 - December 2024</p>
+                            <ul class="list-disc list-inside text-gray-300 space-y-1">
+                                <li>Assisted in developing and maintaining internal tools using React and Node.js.</li>
+                                <li>Participated in code reviews and contributed to team projects.</li>
+                                <li>Gained hands-on experience in Agile development and version control with Git.</li>
+                            </ul>
+                        </div>
+                        <!-- Internship 2 -->
+                        <div>
+                            <h4 class="text-xl font-semibold text-blue-400 mb-1">Software Engineering Intern</h4>
+                            <p class="text-gray-300 mb-1">Future Tech Solutions | Naga, Cebu</p>
+                            <p class="text-gray-400 mb-2">January 2024 - December 2024</p>
+                            <ul class="list-disc list-inside text-gray-300 space-y-1">
+                                <li>Developed and tested new features for the company’s web applications using Laravel.</li>
+                                <li>Collaborated with the design team to implement UI/UX improvements.</li>
+                                <li>Worked on bug fixes and performance enhancements based on user feedback.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Education Section -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-200 mb-4 flex items-center">
+                        <i class="fas fa-graduation-cap mr-2 text-xl"></i> Education
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- Degree -->
+                        <div>
+                            <h4 class="text-xl font-semibold text-blue-400 mb-1">Bachelor of Science in Computer Science</h4>
+                            <p class="text-gray-300 mb-1">Professional Academy of the Philippines</p>
+                            <p class="text-gray-400 mb-2">Expected Graduation: 2025</p>
+                            <p class="text-gray-300">Relevant coursework: Data Structures, Algorithms, Web Development, Database Management.</p>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Download Link -->
+                <div class="text-center">
+                    <a href="pdf/Resumelate.pdf" download class="inline-block bg-blue-900 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300">
+                        Download My Resume
+                    </a>
+                </div>
+            </section>
+            
+<!-- Contact Section -->
+<section id="contact" class="bg-gray-800 p-12 rounded-lg shadow-lg fade-in">
+    <h2 class="text-4xl font-bold text-gray-100 mb-8 flex items-center">
+        <i class="fas fa-envelope mr-4 text-3xl"></i> Contact
+    </h2>
+    <p class="text-lg text-gray-300 mb-8">I'd love to hear from you! Whether you have a question, a project idea, or just want to connect, feel free to reach out through the form below or via email.</p>
+    
+    <!-- Contact Form -->
+    <form id="contactForm" class="space-y-6">
+        <div class="mb-4">
+            <label for="name" class="sr-only">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="Your Name" class="w-full p-4 rounded-lg bg-gray-700 border border-gray-600 text-gray-200 focus:border-blue-500 focus:outline-none" required>
+        </div>
+        <div class="mb-4">
+            <label for="email" class="sr-only">Your Email</label>
+            <input type="email" id="email" name="email" placeholder="Your Email" class="w-full p-4 rounded-lg bg-gray-700 border border-gray-600 text-gray-200 focus:border-blue-500 focus:outline-none" required>
+        </div>
+        <div class="mb-6">
+            <label for="message" class="sr-only">Your Message</label>
+            <textarea id="message" name="message" placeholder="Your Message" rows="6" class="w-full p-4 rounded-lg bg-gray-700 border border-gray-600 text-gray-200 focus:border-blue-500 focus:outline-none" required></textarea>
+        </div>
+        <button type="submit" class="inline-block py-3 px-6 bg-blue-600 text-white rounded-full hover:bg-blue-500 transition-colors duration-300">Send Message</button>
+    </form>
+
+    <!-- Contact Information -->
+    <div class="mt-12 text-gray-300">
+        <p class="text-lg mb-2">Alternatively, you can reach me directly at:</p>
+        <p class="text-lg mb-2">
+            <i class="fas fa-envelope mr-2"></i>
+            <a href="mailto:jeremytaraya11@example.com" class="text-blue-400 hover:text-blue-300 transition-colors duration-300">jeremytaraya11@example.com</a>
+        </p>
+        <p class="text-lg">
+            <i class="fas fa-phone-alt mr-2"></i>
+            <a href="tel:+1234567890" class="text-blue-400 hover:text-blue-300 transition-colors duration-300">093877721327</a>
+        </p>
+    </div>
+</section>
+
+<!-- Modal -->
+<div id="modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center hidden z-50">
+    <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+        <p class="text-lg text-gray-100 mb-4">Thank you for reaching out! Your message is being processed. Please wait a moment.</p>
+        <button id="closeModal" class="py-2 px-4 bg-blue-600 text-white rounded-full hover:bg-blue-500 transition-colors duration-300">OK</button>
+    </div>
+</div>
+    </main>
+    <footer class="bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 text-gray-400 py-8">
+        <div class="container mx-auto text-center">
+            <p class="text-xs md:text-sm mb-4">&copy; <span id="year"></span> Jeremy Taraya. All rights reserved.</p>
+            <div class="flex justify-center space-x-6">
+                <a href="https://www.facebook.com/profile.php?id=100084055344022" 
+                   class="text-gray-400 hover:text-blue-600 transition-colors duration-300 transform hover:scale-110"
+                   aria-label="Facebook Profile" 
+                   target="_blank" 
+                   rel="noopener noreferrer">
+                    <i class="fab fa-facebook-f fa-2x"></i>
+                </a>
+                <a href="https://instagram.com/jeremytaraya" 
+                   class="text-gray-400 hover:text-pink-600 transition-colors duration-300 transform hover:scale-110"
+                   aria-label="Instagram Profile" 
+                   target="_blank" 
+                   rel="noopener noreferrer">
+                    <i class="fab fa-instagram fa-2x"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+    
+    
+    
+    <script>
+        // Fade-in effect
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight) {
+                    el.classList.add('visible');
+                }
+            });
+            window.addEventListener('scroll', () => {
+                elements.forEach(el => {
+                    if (el.getBoundingClientRect().top < window.innerHeight) {
+                        el.classList.add('visible');
+                    }
+                });
+            });
+        });
+        document.getElementById('year').textContent = new Date().getFullYear();
+        document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('nav a');
+    const sections = document.querySelectorAll('section');
+
+    window.addEventListener('scroll', function() {
+        let current = '';
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active-link');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active-link');
+            }
+        });
+    });
+});
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Show the modal
+    document.getElementById('modal').classList.remove('hidden');
+
+    // Simulate a delay for sending the message (e.g., an API call)
+    setTimeout(function() {
+        // Hide the modal after 3 seconds
+        document.getElementById('modal').classList.add('hidden');
+
+        // Optionally, you can clear the form fields or show a success message here
+        document.getElementById('contactForm').reset();
+    }, 3000);
+});
+
+// Close the modal when the "OK" button is clicked
+document.getElementById('closeModal').addEventListener('click', function() {
+    document.getElementById('modal').classList.add('hidden');
+});
+
+    </script>
+</body>
+</html>
